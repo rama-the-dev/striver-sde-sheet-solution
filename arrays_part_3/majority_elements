@@ -1,0 +1,31 @@
+package main
+
+/*
+Given an array nums of size n, return the majority element.
+The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.
+*/
+
+/*
+Boyer-Morre algorithm
+1. take 2 vars, ans and count
+2. keep track of majority element and if not found reduce count by one
+3. if count = 0 then update answer and count to current element and count by one
+*/
+func majorityElement(nums []int) int {
+	if len(nums) == 0 {
+		return 0
+	}
+	ans, count := nums[0], 1
+	for i := 1; i < len(nums); i++ {
+		if nums[i] == ans {
+			count++
+		} else {
+			count--
+		}
+		if count == 0 {
+			ans = nums[i]
+			count++
+		}
+	}
+	return ans
+}
